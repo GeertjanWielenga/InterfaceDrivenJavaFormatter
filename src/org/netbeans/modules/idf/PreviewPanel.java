@@ -84,6 +84,7 @@ public class PreviewPanel extends javax.swing.JPanel {
 
     public PreviewPanel() {
         initComponents();
+        jEditorPane1.setText(Bundle.none());
         idfPref.addPreferenceChangeListener(new PreferenceChangeListener() {
             public void preferenceChange(PreferenceChangeEvent evt) {
                 if (evt.getKey().equals("interfaceDrivenFormatterPref")) {
