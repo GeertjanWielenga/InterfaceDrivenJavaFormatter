@@ -84,25 +84,28 @@ public class PreviewPanel extends javax.swing.JPanel {
 
     public PreviewPanel() {
         initComponents();
-        jEditorPane1.setText(Bundle.none());
+        valueProvider(idfPref.get("interfaceDrivenFormatterPref", "none"));
         idfPref.addPreferenceChangeListener(new PreferenceChangeListener() {
             public void preferenceChange(PreferenceChangeEvent evt) {
                 if (evt.getKey().equals("interfaceDrivenFormatterPref")) {
-                    String value = evt.getNewValue();
-                    if (value.equals("asdeclared")) {
-                        jEditorPane1.setText(Bundle.asDeclared());
-                    } else if (value.equals("alphabetical")) {
-                        jEditorPane1.setText(Bundle.alphabetical());
-                    } else if (value.equals("increasing")) {
-                        jEditorPane1.setText(Bundle.increasing());
-                    } else if (value.equals("decreasing")) {
-                        jEditorPane1.setText(Bundle.decreasing());
-                    } else if (value.equals("none")) {
-                        jEditorPane1.setText(Bundle.none());
-                    }
+                    valueProvider(evt.getNewValue());
                 }
             }
         });
+    }
+    
+    private void valueProvider(String value) {
+        if (value.equals("asdeclared")) {
+            jEditorPane1.setText(Bundle.asDeclared());
+        } else if (value.equals("alphabetical")) {
+            jEditorPane1.setText(Bundle.alphabetical());
+        } else if (value.equals("increasing")) {
+            jEditorPane1.setText(Bundle.increasing());
+        } else if (value.equals("decreasing")) {
+            jEditorPane1.setText(Bundle.decreasing());
+        } else if (value.equals("none")) {
+            jEditorPane1.setText(Bundle.none());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

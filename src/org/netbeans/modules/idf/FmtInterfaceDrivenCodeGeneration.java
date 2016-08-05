@@ -16,14 +16,44 @@ public class FmtInterfaceDrivenCodeGeneration extends javax.swing.JPanel {
     public FmtInterfaceDrivenCodeGeneration() {
         initComponents();
         setName(Bundle.CTL_DisplayText());
+        initCheckboxes();
         asDeclaredCheckBox.addActionListener(new SwitchIDFPreference("asdeclared"));
         alphabeticalCheckBox.addActionListener(new SwitchIDFPreference("alphabetical"));
         increasingGeneralityCheckBox.addActionListener(new SwitchIDFPreference("increasing"));
         decreasingGeneralityCheckBox.addActionListener(new SwitchIDFPreference("decreasing"));
         enableCheckBox.addActionListener(new EnableDisableActionListener());
     }
-    
+
+    private void initCheckboxes() {
+        String value = fmtIDCGPref.get("interfaceDrivenFormatterPref", "none");
+        if (!value.equals("none")) {
+            enableCheckBox.setSelected(true);
+            new EnableDisableActionListener().actionPerformed(null);
+            switch (value) {
+                case "asdeclared":
+                    asDeclaredCheckBox.setSelected(true);
+            new SwitchIDFPreference("asdeclared").actionPerformed(null);
+                    break;
+                case "alphabetical":
+                    alphabeticalCheckBox.setSelected(true);
+            new SwitchIDFPreference("alphabetical").actionPerformed(null);
+                    break;
+                case "increasing":
+                    increasingGeneralityCheckBox.setSelected(true);
+            new SwitchIDFPreference("increasing").actionPerformed(null);
+                    break;
+                case "decreasing":
+                    decreasingGeneralityCheckBox.setSelected(true);
+            new SwitchIDFPreference("decreasing").actionPerformed(null);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     private class EnableDisableActionListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (enableCheckBox.isSelected()) {
@@ -31,26 +61,27 @@ public class FmtInterfaceDrivenCodeGeneration extends javax.swing.JPanel {
                 alphabeticalCheckBox.setEnabled(true);
                 increasingGeneralityCheckBox.setEnabled(true);
                 decreasingGeneralityCheckBox.setEnabled(true);
+                asDeclaredCheckBox.setSelected(true);
+                new SwitchIDFPreference("asdeclared").actionPerformed(null);
             } else if (!enableCheckBox.isSelected()) {
                 asDeclaredCheckBox.setEnabled(false);
                 alphabeticalCheckBox.setEnabled(false);
                 increasingGeneralityCheckBox.setEnabled(false);
                 decreasingGeneralityCheckBox.setEnabled(false);
-                asDeclaredCheckBox.setSelected(false);
-                alphabeticalCheckBox.setSelected(false);
-                increasingGeneralityCheckBox.setSelected(false);
-                decreasingGeneralityCheckBox.setSelected(false);
                 buttonGroup1.clearSelection();
                 fmtIDCGPref.put("interfaceDrivenFormatterPref", "none");
             }
         }
     }
-    
+
     private class SwitchIDFPreference implements ActionListener {
+
         private final String idfPref;
+
         private SwitchIDFPreference(String idfPref) {
             this.idfPref = idfPref;
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             fmtIDCGPref.put("interfaceDrivenFormatterPref", idfPref);
