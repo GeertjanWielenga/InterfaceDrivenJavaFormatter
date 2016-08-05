@@ -7,6 +7,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 
 @NbBundle.Messages({
+    "none=",
     "increasing=public class ClassA implements MyInterface {\n" +
 "\n" +
 "    @Override\n" +
@@ -95,6 +96,8 @@ public class PreviewPanel extends javax.swing.JPanel {
                         jEditorPane1.setText(Bundle.increasing());
                     } else if (value.equals("decreasing")) {
                         jEditorPane1.setText(Bundle.decreasing());
+                    } else if (value.equals("none")) {
+                        jEditorPane1.setText(Bundle.none());
                     }
                 }
             }

@@ -20,6 +20,7 @@ public class FmtInterfaceDrivenCodeGeneration extends javax.swing.JPanel {
         alphabeticalCheckBox.addActionListener(new SwitchIDFPreference("alphabetical"));
         increasingGeneralityCheckBox.addActionListener(new SwitchIDFPreference("increasing"));
         decreasingGeneralityCheckBox.addActionListener(new SwitchIDFPreference("decreasing"));
+        noneCheckBox.addActionListener(new SwitchIDFPreference("none"));
     }
 
     private class SwitchIDFPreference implements ActionListener {
