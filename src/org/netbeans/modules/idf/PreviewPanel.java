@@ -1,32 +1,104 @@
 package org.netbeans.modules.idf;
 
+import java.util.prefs.PreferenceChangeEvent;
+import java.util.prefs.PreferenceChangeListener;
+import java.util.prefs.Preferences;
 import org.openide.util.NbBundle;
+import org.openide.util.NbPreferences;
 
 @NbBundle.Messages({
-    "asDeclared=import java.awt.event.ActionEvent;\n" +
-"import java.awt.event.ActionListener;\n" +
+    "increasing=public class ClassA implements MyInterface {\n" +
 "\n" +
-"public class AClass implements ActionListener, Runnable {\n" +
-"\n" +
-"    //After formatting, this member will be second,\n" +
-"    //because its interface is declared second:\n" +
 "    @Override\n" +
-"    public void run() {\n" +
+"    public void doThis(String description, int howManyTimes) {\n" +
+"    }\n" +
+"\n" +
+"    @Override\n" +
+"    public void doThis(String description) {\n" +
+"    }\n" +
+"\n" +
+"    @Override\n" +
+"    public void doThis() {\n" +
 "    }\n" +
 "    \n" +
-"    //After formatting, this member will be first,\n" +
-"    //because its interface is declared first:\n" +
+"}",
+    "decreasing=public class ClassA implements MyInterface {\n" +
+"\n" +
+"    @Override\n" +
+"    public void doThis() {\n" +
+"    }\n" +
+"    \n" +
+"    @Override\n" +
+"    public void doThis(String description) {\n" +
+"    }\n" +
+"\n" +
+"    @Override\n" +
+"    public void doThis(String description, int howManyTimes) {\n" +
+"    }\n" +
+"    \n" +
+"}\n" +
+"",
+    "asDeclared=public class ClassA implements ActionListener, Runnable {\n"
+    + "\n"
+    + "    //After formatting, this member will be second,\n"
+    + "    //because its interface is declared second:\n"
+    + "    @Override\n"
+    + "    public void run() {\n"
+    + "    }\n"
+    + "    \n"
+    + "    //After formatting, this member will be first,\n"
+    + "    //because its interface is declared first:\n"
+    + "    @Override\n"
+    + "    public void actionPerformed(ActionEvent e) {\n"
+    + "    }\n"
+    + "    \n"
+    + "}",
+    "alphabetical=public class ClassA implements KeyListener, ActionListener {\n" +
+"\n" +
+"    // After formatting, these three members \n" +
+"    // will be sorted alphabetically:     \n" +
+"    @Override\n" +
+"    public void keyTyped(KeyEvent e) {\n" +
+"    }\n" +
+"    @Override\n" +
+"    public void keyPressed(KeyEvent e) {\n" +
+"    }\n" +
+"    @Override\n" +
+"    public void keyReleased(KeyEvent e) {\n" +
+"    }\n" +
+"\n" +
+"    // After formatting, this member will  \n" +
+"    // still be here, since its interface\n" +
+"    // is declared after KeyListener:\n" +
 "    @Override\n" +
 "    public void actionPerformed(ActionEvent e) {\n" +
 "    }\n" +
 "    \n" +
-"}"
+"}\n" +
+""
 })
 public class PreviewPanel extends javax.swing.JPanel {
 
+    Preferences idfPref = NbPreferences.forModule(FmtInterfaceDrivenCodeGeneration.class);
+
     public PreviewPanel() {
         initComponents();
-        jEditorPane1.setText(Bundle.asDeclared());
+        idfPref.addPreferenceChangeListener(new PreferenceChangeListener() {
+            public void preferenceChange(PreferenceChangeEvent evt) {
+                if (evt.getKey().equals("interfaceDrivenFormatterPref")) {
+                    String value = evt.getNewValue();
+                    if (value.equals("asdeclared")) {
+                        jEditorPane1.setText(Bundle.asDeclared());
+                    } else if (value.equals("alphabetical")) {
+                        jEditorPane1.setText(Bundle.alphabetical());
+                    } else if (value.equals("increasing")) {
+                        jEditorPane1.setText(Bundle.increasing());
+                    } else if (value.equals("decreasing")) {
+                        jEditorPane1.setText(Bundle.decreasing());
+                    }
+                }
+            }
+        });
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,6 +109,7 @@ public class PreviewPanel extends javax.swing.JPanel {
 
         jScrollPane2.setEnabled(false);
 
+        jEditorPane1.setEditable(false);
         jEditorPane1.setContentType("text/x-java"); // NOI18N
         jScrollPane2.setViewportView(jEditorPane1);
 

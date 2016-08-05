@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.4" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -46,6 +46,7 @@
       <SubComponents>
         <Component class="javax.swing.JEditorPane" name="jEditorPane1">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="contentType" type="java.lang.String" value="text/x-java" noResource="true"/>
           </Properties>
         </Component>
