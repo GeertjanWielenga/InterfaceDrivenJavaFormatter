@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    
+    <folder name="OptionsDialog">
+        <folder name="Editor">
+            <folder name="Formatting">
+                <folder name="text">
+                    <folder name="x-java">
+                        <file name="FmtInterfaceDrivenCodeGeneration.instance">
+                            <attr name="instanceOf" stringvalue="org.netbeans.modules.options.editor.spi.PreferencesCustomizer$Factory"/>
+                            <attr name="instanceCreate" methodvalue="org.netbeans.modules.idf.InterfaceDrivenControler.getController"/>
+                            <attr name="position" intvalue="1200"/>
+                        </file>
+                    </folder>
+                </folder>
+            </folder>
+        </folder>
+    </folder>
+    
+</filesystem>
