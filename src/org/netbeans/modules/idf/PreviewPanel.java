@@ -7,7 +7,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.NbPreferences;
 
 @NbBundle.Messages({
-    "none=",
+    "none=Formatting will ignore interfaces.",
     "increasing=public class ClassA implements MyInterface {\n" +
 "\n" +
 "    @Override\n" +
